@@ -5,7 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Github, Linkedin } from "lucide-react";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import emailjs from "@emailjs/browser"; // Import EmailJS SDK
 
 // Particle animation component
 function ParticleCanvas() {
@@ -78,9 +79,46 @@ function ParticleCanvas() {
 
 // Contact section with particle animation
 export default function ContactSection() {
+  const formRef = useRef<HTMLFormElement>(null);
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    // Initialize EmailJS with your public key
+    emailjs.init("gs9KuoeMg16x-VYCn"); // Using your provided Public Key
+  }, []);
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Handle form submission
+
+    setLoading(true);
+    setError(false);
+    setSuccess(false);
+
+    // Use sendForm to send the form data through EmailJS
+    if (formRef.current) {
+      emailjs
+        .sendForm(
+          "service_hdz9af9", // Using your provided Service ID
+          "template_vu6wdc7", // Using your provided Template ID
+          formRef.current
+        )
+        .then(
+          (result) => {
+            console.log("SUCCESS!", result.text);
+            setSuccess(true);
+            formRef.current?.reset(); // Clear form after success
+          },
+          (error) => {
+            console.log("FAILED...", error.text);
+            setError(true);
+          }
+        )
+        .finally(() => {
+          setLoading(false);
+        });
+    }
   };
 
   return (
@@ -97,12 +135,32 @@ export default function ContactSection() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <Input type="text" placeholder="Your Name" required />
-              <Input type="email" placeholder="Your Email" required />
-              <Textarea placeholder="Your Message" required />
-              <Button type="submit">Send Message</Button>
+            <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
+              <Input
+                type="text"
+                name="user_name"
+                placeholder="Your Name"
+                required
+              />
+              <Input
+                type="email"
+                name="user_email"
+                placeholder="Your Email"
+                required
+              />
+              <Textarea name="message" placeholder="Your Message" required />
+              <Button type="submit" disabled={loading}>
+                {loading ? "Sending..." : "Send Message"}
+              </Button>
             </form>
+            {success && (
+              <p className="text-green-500 mt-4">Message sent successfully!</p>
+            )}
+            {error && (
+              <p className="text-red-500 mt-4">
+                Failed to send message. Please try again later.
+              </p>
+            )}
           </motion.div>
           <motion.div
             initial={{ opacity: 0, x: 50 }}
