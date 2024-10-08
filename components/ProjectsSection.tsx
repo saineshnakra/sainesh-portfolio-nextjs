@@ -9,8 +9,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ExternalLink } from "lucide-react";
-import { SiGithub } from "react-icons/si";
+import { Github, ExternalLink } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 const projects = [
@@ -119,7 +118,7 @@ export default function ProjectsSection() {
           }
         });
       },
-      { threshold: 0.3 }
+      { threshold: 0.1 } // Make the threshold smaller to trigger animation earlier on mobile
     );
 
     if (sectionRef.current) {
@@ -137,13 +136,13 @@ export default function ProjectsSection() {
     <section
       id="projects"
       ref={sectionRef}
-      className="py-10 md:py-20 bg-secondary relative"
+      className="py-4 sm:py-8 md:py-12 lg:py-16 bg-secondary relative"
     >
       <div className="container mx-auto px-4">
-        <h2 className="section-heading text-center mb-8 md:mb-12">
+        <h2 className="section-heading text-center mb-4 sm:mb-6 md:mb-8 lg:mb-10">
           Featured Projects
         </h2>
-        <div className="grid gap-6 md:gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-4 sm:gap-6 md:gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
           {projects.map((project, index) => (
             <motion.div
               key={index}
@@ -157,25 +156,32 @@ export default function ProjectsSection() {
                         type: "spring",
                         stiffness: 100,
                         damping: 10,
+                        delay: index * 0.1,
                       },
                     }
                   : {}
               }
-              className="transform transition-transform ease-in-out animate-fade-in-mobile w-full"
+              className="transform transition-transform ease-in-out animate-fade-in-mobile"
             >
               <Card className="h-full flex flex-col">
                 <CardHeader>
-                  <CardTitle>{project.title}</CardTitle>
-                  <CardDescription>{project.description}</CardDescription>
+                  <CardTitle className="text-base sm:text-lg">
+                    {project.title}
+                  </CardTitle>
+                  <CardDescription className="text-xs sm:text-sm">
+                    {project.description}
+                  </CardDescription>
                 </CardHeader>
-                <CardContent className="flex-grow">
+                <CardContent className="flex-grow flex flex-col justify-between">
                   <div className="mb-4">
-                    <h4 className="font-semibold mb-2">Technologies:</h4>
+                    <h4 className="font-semibold mb-2 text-xs sm:text-sm">
+                      Technologies:
+                    </h4>
                     <div className="flex flex-wrap gap-2">
                       {project.technologies.map((tech, i) => (
                         <span
                           key={i}
-                          className="bg-primary/10 text-primary text-sm py-1 px-2 rounded"
+                          className="bg-primary/10 text-primary text-xs sm:text-sm py-1 px-2 rounded"
                         >
                           {tech}
                         </span>
@@ -183,24 +189,40 @@ export default function ProjectsSection() {
                     </div>
                   </div>
                   <div className="flex justify-between mt-auto">
-                    <Button variant="outline" size="sm" asChild>
-                      <a
-                        href={project.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
+                    {project.github && (
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        asChild
+                        className="text-xs sm:text-sm"
                       >
-                        <SiGithub className="mr-2 h-4 w-4" /> GitHub
-                      </a>
-                    </Button>
-                    <Button variant="outline" size="sm" asChild>
-                      <a
-                        href={project.demo}
-                        target="_blank"
-                        rel="noopener noreferrer"
+                        <a
+                          href={project.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <Github className="mr-1 h-3 w-3 sm:h-4 sm:w-4" />{" "}
+                          GitHub
+                        </a>
+                      </Button>
+                    )}
+                    {project.demo && (
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        asChild
+                        className="text-xs sm:text-sm"
                       >
-                        <ExternalLink className="mr-2 h-4 w-4" /> Demo
-                      </a>
-                    </Button>
+                        <a
+                          href={project.demo}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <ExternalLink className="mr-1 h-3 w-3 sm:h-4 sm:w-4" />{" "}
+                          Demo
+                        </a>
+                      </Button>
+                    )}
                   </div>
                 </CardContent>
               </Card>

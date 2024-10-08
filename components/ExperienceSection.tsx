@@ -134,8 +134,9 @@ export default function ExperienceSection() {
     };
   }, []);
 
-  const sortedData = timelineData.sort(
-    (a, b) => b.startDate.getTime() - a.startDate.getTime()
+  const workItems = timelineData.filter((item) => item.type === "work");
+  const educationItems = timelineData.filter(
+    (item) => item.type === "education"
   );
 
   return (
@@ -153,11 +154,36 @@ export default function ExperienceSection() {
         >
           Work Experience & Education
         </motion.h2>
-        <div className="relative">
-          {/* Vertical line - hide on mobile */}
-          <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-primary hidden md:block"></div>
 
-          {sortedData.map((item, index) => (
+        {/* For mobile, split into two separate timelines */}
+        <div className="md:hidden">
+          <h3 className="text-xl font-semibold mb-4">Work Experience</h3>
+          {workItems.map((item, index) => (
+            <TimelineItem
+              key={index}
+              item={item}
+              index={index}
+              inView={inView}
+            />
+          ))}
+
+          <h3 className="text-xl font-semibold mt-8 mb-4">Education</h3>
+          {educationItems.map((item, index) => (
+            <TimelineItem
+              key={index}
+              item={item}
+              index={index}
+              inView={inView}
+            />
+          ))}
+        </div>
+
+        {/* For larger screens, use the regular timeline */}
+        <div className="relative hidden md:block">
+          {/* Vertical line for desktop view */}
+          <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-primary"></div>
+
+          {timelineData.map((item, index) => (
             <TimelineItem
               key={index}
               item={item}
