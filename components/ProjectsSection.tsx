@@ -9,7 +9,8 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Github, ExternalLink } from "lucide-react";
+import { ExternalLink } from "lucide-react";
+import { SiGithub } from "react-icons/si";
 import { useEffect, useRef, useState } from "react";
 
 const projects = [
@@ -136,21 +137,22 @@ export default function ProjectsSection() {
     <section
       id="projects"
       ref={sectionRef}
-      className="py-20 bg-secondary relative"
+      className="py-10 md:py-20 bg-secondary relative"
     >
       <div className="container mx-auto px-4">
-        <h2 className="section-heading text-center mb-12">Featured Projects</h2>
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <h2 className="section-heading text-center mb-8 md:mb-12">
+          Featured Projects
+        </h2>
+        <div className="grid gap-6 md:gap-8 md:grid-cols-2 lg:grid-cols-3">
           {projects.map((project, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
+              initial={{ opacity: 0, scale: 0.9 }}
               animate={
                 inView
                   ? {
                       opacity: 1,
                       scale: 1,
-                      rotate: 0,
                       transition: {
                         type: "spring",
                         stiffness: 100,
@@ -159,9 +161,7 @@ export default function ProjectsSection() {
                     }
                   : {}
               }
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              whileHover={{ scale: 1.05, rotate: 2 }}
-              className="transform transition-transform ease-in-out"
+              className="transform transition-transform ease-in-out animate-fade-in-mobile w-full"
             >
               <Card className="h-full flex flex-col">
                 <CardHeader>
@@ -189,7 +189,7 @@ export default function ProjectsSection() {
                         target="_blank"
                         rel="noopener noreferrer"
                       >
-                        <Github className="mr-2 h-4 w-4" /> GitHub
+                        <SiGithub className="mr-2 h-4 w-4" /> GitHub
                       </a>
                     </Button>
                     <Button variant="outline" size="sm" asChild>

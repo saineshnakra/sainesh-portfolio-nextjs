@@ -110,18 +110,17 @@ export default function ExperienceSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const [inView, setInView] = useState(false);
 
-  // Use IntersectionObserver to detect when the section is visible
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             setInView(true);
-            observer.disconnect(); // Stop observing after it's in view
+            observer.disconnect();
           }
         });
       },
-      { threshold: 0.2 } // Trigger when 20% of the section is visible
+      { threshold: 0.2 }
     );
 
     if (sectionRef.current) {
@@ -140,19 +139,23 @@ export default function ExperienceSection() {
   );
 
   return (
-    <section ref={sectionRef} id="experience" className="py-20 bg-background">
+    <section
+      ref={sectionRef}
+      id="experience"
+      className="py-10 md:py-20 bg-background"
+    >
       <div className="container mx-auto px-4">
         <motion.h2
           initial={{ opacity: 0, y: -20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5 }}
-          className="section-heading text-center mb-12"
+          className="section-heading text-center mb-8 md:mb-12"
         >
           Work Experience & Education
         </motion.h2>
         <div className="relative">
-          {/* Vertical line */}
-          <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-primary"></div>
+          {/* Vertical line - hide on mobile */}
+          <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-primary hidden md:block"></div>
 
           {sortedData.map((item, index) => (
             <TimelineItem
@@ -181,25 +184,30 @@ function TimelineItem({
 
   return (
     <motion.div
-      className={`flex items-start mb-8 ${isEducation ? "education-item" : ""}`}
-      initial={{ opacity: 0, y: 50 }}
+      className={`flex flex-col md:flex-row items-start mb-8 ${
+        isEducation ? "education-item" : ""
+      }`}
+      initial={{ opacity: 0, y: 20 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.5, delay: index * 0.1 }}
-      style={{ minHeight: "200px" }}
     >
       {isEducation ? (
         <>
-          <div className="w-5/12 pr-8 text-right">
+          <div className="w-full md:w-5/12 md:pr-8 md:text-right">
             <TimelineCard item={item} />
           </div>
-          <TimelineIcon type={item.type} />
-          <div className="w-5/12"></div>
+          <div className="hidden md:block w-2/12">
+            <TimelineIcon type={item.type} />
+          </div>
+          <div className="hidden md:block w-5/12"></div>
         </>
       ) : (
         <>
-          <div className="w-5/12"></div>
-          <TimelineIcon type={item.type} />
-          <div className="w-5/12 pl-8 text-left">
+          <div className="hidden md:block w-5/12"></div>
+          <div className="hidden md:block w-2/12">
+            <TimelineIcon type={item.type} />
+          </div>
+          <div className="w-full md:w-5/12 md:pl-8 md:text-left">
             <TimelineCard item={item} />
           </div>
         </>
@@ -210,7 +218,7 @@ function TimelineItem({
 
 function TimelineCard({ item }: { item: (typeof timelineData)[0] }) {
   return (
-    <Card className="shadow-md h-full">
+    <Card className="shadow-md h-full animate-fade-in-mobile">
       <CardHeader>
         <CardTitle className="text-lg font-semibold">{item.title}</CardTitle>
         <CardDescription className="text-sm">
@@ -233,7 +241,7 @@ function TimelineCard({ item }: { item: (typeof timelineData)[0] }) {
 
 function TimelineIcon({ type }: { type: "work" | "education" }) {
   return (
-    <div className="relative flex items-center justify-center w-2/12">
+    <div className="relative flex items-center justify-center">
       <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center z-10">
         {type === "work" ? (
           <Briefcase className="w-4 h-4 text-primary-foreground" />
