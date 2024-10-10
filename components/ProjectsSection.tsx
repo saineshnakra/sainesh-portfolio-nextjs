@@ -69,13 +69,6 @@ const projects = [
     demo: "https://sainesh.com",
   },
   {
-    title: "The 2048 Game",
-    description:
-      "Redesigned the UI for the popular 2048 game to make it ad-free and visually engaging. Implemented using JavaScript and made open-source for customization.",
-    technologies: ["HTML", "CSS", "JavaScript"],
-    demo: "https://project-7551190131884617807.web.app",
-  },
-  {
     title: "Netflix Clone (SNSTREAM)",
     description:
       "Used React to recreate the Netflix UI with real-time data updates for shows, using API endpoints to ensure fresh content each time.",
@@ -103,12 +96,30 @@ const projects = [
     technologies: ["React", "Firebase"],
     demo: "https://linkedin-clone-b19eb.web.app",
   },
+];
+
+const games = [
+  {
+    title: "Road Kill",
+    description:
+      "Road Kill is an engaging and dynamic racing game that integrates blockchain technology to offer a thrilling gaming experience while ensuring secure and transparent leaderboard management. Players navigate through various levels, dodge obstacles, collect rewards, and customize their cars with different skins. The game’s unique blend of fast-paced action and blockchain integration offers a novel approach to racing games.",
+    technologies: ["JavaScript", "Polkadot", "Web3 API", "Substrate"],
+    demo: "https://racing-game-hack.vercel.app/",
+    github: "https://github.com/saineshnakra/racing-game-hack",
+  },
   {
     title: "Arcade Snake Game",
     description:
       "Recreated the popular snake video game with a cleaner UI using HTML, CSS, and vanilla JavaScript.",
     technologies: ["HTML", "CSS", "JavaScript"],
     demo: "https://snakegame-26ca8.web.app",
+  },
+  {
+    title: "The 2048 Game",
+    description:
+      "Redesigned the UI for the popular 2048 game to make it ad-free and visually engaging. Implemented using JavaScript and made open-source for customization.",
+    technologies: ["HTML", "CSS", "JavaScript"],
+    demo: "https://project-7551190131884617807.web.app",
   },
 ];
 
@@ -223,6 +234,97 @@ export default function ProjectsSection() {
                       >
                         <a
                           href={project.demo}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <ExternalLink className="mr-1 h-3 w-3 sm:h-4 sm:w-4" />{" "}
+                          Demo
+                        </a>
+                      </Button>
+                    )}
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
+          ))}
+        </div>
+
+        <h2 className="section-heading text-center mt-12 mb-4 sm:mb-6 md:mb-8 lg:mb-10">
+          Game Projects
+        </h2>
+        <div className="grid gap-4 sm:gap-6 md:gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+          {games.map((game, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={
+                inView
+                  ? {
+                      opacity: 1,
+                      scale: 1,
+                      transition: {
+                        type: "spring",
+                        stiffness: 100,
+                        damping: 10,
+                        delay: index * 0.1,
+                      },
+                    }
+                  : {}
+              }
+              className="transform transition-transform ease-in-out animate-fade-in-mobile"
+            >
+              <Card className="h-full flex flex-col">
+                <CardHeader>
+                  <CardTitle className="text-base sm:text-lg">
+                    {game.title}
+                  </CardTitle>
+                  <CardDescription className="text-xs sm:text-sm">
+                    {game.description}
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="flex-grow flex flex-col justify-between">
+                  <div className="mb-4">
+                    <h4 className="font-semibold mb-2 text-xs sm:text-sm">
+                      Technologies:
+                    </h4>
+                    <div className="flex flex-wrap gap-2">
+                      {game.technologies.map((tech, i) => (
+                        <span
+                          key={i}
+                          className="bg-primary/10 text-primary text-xs sm:text-sm py-1 px-2 rounded"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="flex justify-between mt-auto">
+                    {game.github && (
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        asChild
+                        className="text-xs sm:text-sm"
+                      >
+                        <a
+                          href={game.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <Github className="mr-1 h-3 w-3 sm:h-4 sm:w-4" />{" "}
+                          GitHub
+                        </a>
+                      </Button>
+                    )}
+                    {game.demo && (
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        asChild
+                        className="text-xs sm:text-sm"
+                      >
+                        <a
+                          href={game.demo}
                           target="_blank"
                           rel="noopener noreferrer"
                         >
