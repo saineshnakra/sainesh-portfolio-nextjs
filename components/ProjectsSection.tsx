@@ -22,6 +22,14 @@ const projects = [
     demo: "https://defix-guard-crypto.vercel.app/",
   },
   {
+    title: "Insurance GPT",
+    description:
+      "Developed an AI-powered assistant for navigating health insurance services. The application allows users to upload their insurance policy PDFs to discover preventive and free services covered by their insurance. It also helps users find booking locations based on their policy and location inputs. The website features a stunning and interactive user interface with advanced CSS styling for an enhanced user experience.",
+    technologies: ["Python", "Streamlit", "OpenAI GPT-4", "CSS"],
+    demo: "https://insuranceaigpt.streamlit.app/",
+    github: "https://github.com/saineshnakra/insurance-ai",
+  },
+  {
     title: "Grim Repor: AI-Powered Framework for Fixing Dead Dependencies",
     description:
       "Automated the identification and fixing of broken dependencies in Python repositories, reducing manual effort by 50%. Deployed with GCP and integrated a Twitter bot for real-time updates.",
