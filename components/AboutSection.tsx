@@ -133,8 +133,12 @@ export default function AboutSection() {
             <p className="mb-4 text-lg">
               Hello! I'm Sainesh, a passionate full stack developer, machine
               learning engineer, and software developer. I am pursuing a
-              Master's in Computer Science at Northeastern University, with a
-              focus on machine learning and distributed systems.
+              Master's of Science in Computer Science at Northeastern
+              University, with a focus on machine learning and distributed
+              systems. I am currently a a Graduate Teaching Assistant, a
+              Research Assistant at Northeastern working on ML-driven solutions
+              for video compression of AR/VR content and a Course Advisor at MIT
+              for the course "Foundation of AI Ventures: Venture Studio".
             </p>
             <p className="mb-4 text-lg">
               My professional background includes developing cutting-edge
