@@ -64,8 +64,8 @@ const projects = [
   {
     title: "Portfolio Website",
     description:
-      "An informative portfolio website made using HTML, CSS, Bootstrap, JavaScript, and jQuery. It includes a CV layout, downloadable resume, and contact details.",
-    technologies: ["HTML", "CSS", "Bootstrap", "JavaScript", "jQuery"],
+      "An informative portfolio website made using NextJS and CSS. You are currently on it!",
+    technologies: ["HTML", "CSS", "NextJS", "JavaScript"],
     demo: "https://sainesh.com",
   },
   {
@@ -87,7 +87,7 @@ const projects = [
     description:
       "Designed the frontend experience for an e-commerce store landing page using HTML, CSS, JavaScript, and jQuery.",
     technologies: ["HTML", "CSS", "JavaScript", "jQuery"],
-    demo: "https://saineshnakra.github.io",
+    demo: "https://saineshnakra.github.io/ecommerce/",
   },
   {
     title: "LinkedIn Clone Using React",

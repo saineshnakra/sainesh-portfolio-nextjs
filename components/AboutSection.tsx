@@ -135,10 +135,11 @@ export default function AboutSection() {
               learning engineer, and software developer. I am pursuing a
               Master's of Science in Computer Science at Northeastern
               University, with a focus on machine learning and distributed
-              systems. I am currently a a Graduate Teaching Assistant, a
-              Research Assistant at Northeastern working on ML-driven solutions
-              for video compression of AR/VR content and a Course Advisor at MIT
-              for the course "Foundation of AI Ventures: Venture Studio".
+              systems. I am currently working as a Graduate Teaching Assistant
+              and a Research Assistant at Northeastern University working on
+              ML-driven solutions for video compression of AR/VR content. I am
+              also a Course Advisor at MIT for the course "Foundation of AI
+              Ventures: Venture Studio" under Professor Ramesh Raskar.
             </p>
             <p className="mb-4 text-lg">
               My professional background includes developing cutting-edge
